@@ -1,121 +1,121 @@
 % ------------------------------------------------------------------------------
-% Formatvorlage für Masterarbeiten an der Ohm-Hochschule Nürnberg
+% Stylesheet for a master thesis at TH Nuermberg
 % ------------------------------------------------------------------------------
-%   erstellt von Stefan Macke, 24.04.2009
+%   created by Stefan Macke, 24.04.2009
 %   http://blog.stefan-macke.de
+%
+%   edited by Lennart Heimbs, 19.08.2021
 
-% Dokumentenkopf ---------------------------------------------------------------
-%   Diese Vorlage basiert auf "scrreprt" aus dem koma-script.
+% Document header ---------------------------------------------------------------
+%   This template is based on "scrreprt" from the koma-script.
 % ------------------------------------------------------------------------------
 \documentclass[
-    11pt, % Schriftgröße
-    DIV10,
-    ngerman, % für Umlaute, Silbentrennung etc.
-    a4paper, % Papierformat
-    oneside, % einseitiges Dokument
-    titlepage, % es wird eine Titelseite verwendet
-    parskip=half, % Abstand zwischen Absätzen (halbe Zeile)
-    headings=normal, % Größe der Überschriften verkleinern
-    listof=totoc, % Verzeichnisse im Inhaltsverzeichnis aufführen
-    bibliography=totoc, % Literaturverzeichnis im Inhaltsverzeichnis aufführen
-    index=totoc, % Index im Inhaltsverzeichnis aufführen
-    captions=tableheading, % Beschriftung von Tabellen unterhalb ausgeben
-    final % Status des Dokuments (final/draft)
+    11pt, % font size
+    DIV=10,
+    ngerman, % for german umlauts, hyphenation, ...
+    a4paper, % paper format
+    oneside, % one sided document
+    titlepage, % use a tile page
+    parskip=half, % gap between paragraphs (half a line)
+    headings=normal, % decrease size of headings
+    listof=totoc, % list directories in the table of contents
+    bibliography=totoc, % list bibliography in table of contents
+    index=totoc, % list index in table of contents
+    captions=tableheading, % label tables at bottom of table
+    draft % state of the document (final/draft)
 ]{scrreprt}
 
-% Meta-Informationen -----------------------------------------------------------
-%   Informationen über das Dokument, wie z.B. Titel, Autor, Matrikelnr. etc
-%   werden in der Datei Meta.tex definiert und können danach global
-%   verwendet werden.
+% meta information -----------------------------------------------------------
+%   Infos about the documents, like title, author, matrikelnr, etc
+%   are defined in the file Meta.tex and are available globally for usage
 % ------------------------------------------------------------------------------
 \input{Meta}
 
-% benötigte Packages -----------------------------------------------------------
-%   LaTeX-Packages, die benötigt werden, sind in die Datei Packages.tex
-%   "ausgelagert", um diese Vorlage möglichst übersichtlich zu halten.
+% required packages -----------------------------------------------------------
+%   required latex packages are listed in Packages.tex to keep this template
+%   as clean as possible.
 % ------------------------------------------------------------------------------
 \input{Packages}
 
-% Erstellung eines Index und Abkürzungsverzeichnisses aktivieren ---------------
+% Activate the creation of an index and the list of abbreviations ---------------
 \makeindex
 \makenomenclature
 
-% Kopf- und Fußzeilen, Seitenränder etc. ---------------------------------------
-\input{Seitenstil}
+% Header, footer, margin, ... ---------------------------------------
+\input{PageStyle}
 
-% eigene Definitionen für Silbentrennung
-\include{Silbentrennung}
+% personal definitions for hyphenation
+\include{Hyphenation}
 
-% eigene LaTeX-Befehle
-\include{Befehle}
+% custom latex commands
+\include{Commands}
 
-% Das eigentliche Dokument -----------------------------------------------------
-%   Der eigentliche Inhalt des Dokuments beginnt hier. Die einzelnen Seiten
-%   und Kapitel werden in eigene Dateien ausgelagert und hier nur inkludiert.
+% the actual document
+%   the actual content of the thesis starts here.
+%   single pages and chapters get outsources in their own files
+%   which then get included here
 % ------------------------------------------------------------------------------
 \begin{document}
 
-% auch subsubsection nummerieren
+% also enumerate subsubsections
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-% Deckblatt und Abstract ohne Seitenzahl
+% cover page and abstract without pagenumber
 \ofoot{}
-\include{Deckblatt}
-\include{Inhalt/Abstract}
+\include{CoverPage}
+\include{Content/Abstract}
 \ofoot{\pagemark}
 
-% Seitennummerierung -----------------------------------------------------------
-%   Vor dem Hauptteil werden die Seiten in großen römischen Ziffern 
-%   nummeriert.
+% page numeration -----------------------------------------------------------
+%   Before the main part, number the pages in big roman numerals
 % ------------------------------------------------------------------------------
 \pagenumbering{Roman}
-\tableofcontents % Inhaltsverzeichnis
+\tableofcontents
 
-% Abkürzungsverzeichnis --------------------------------------------------------
-\input{Inhalt/Glossar}
-% für korrekte Überschrift in der Kopfzeile
+% Abkï¿½rzungsverzeichnis --------------------------------------------------------
+\input{Content/Glossar}
+% fï¿½r korrekte ï¿½berschrift in der Kopfzeile
 \clearpage\markboth{\nomname}{\nomname} 
 \printnomenclature
 \label{sec:Glossar}
 
-\listoffigures % Abbildungsverzeichnis
-\listoftables % Tabellenverzeichnis
+\listoffigures % list of figures
+\listoftables % list of tables
 \renewcommand{\lstlistlistingname}{Verzeichnis der Listings}
 \lstlistoflistings % Listings-Verzeichnis
 
-% arabische Seitenzahlen im Hauptteil ------------------------------------------
+% normal page numbers in the main part ------------------------------------------
 \clearpage
 \pagenumbering{arabic}
 
-% die Inhaltskapitel werden in "Inhalt.tex" inkludiert -------------------------
-\input{Inhalt}
+% include the content chapters inside "Content.tex" -------------------------
+\input{Content}
 
-% Literaturverzeichnis ---------------------------------------------------------
-%   Das Literaturverzeichnis wird aus der BibTeX-Datenbank "Bibliographie.bib"
-%   erstellt.
+% bibliography ---------------------------------------------------------
+%   the bibliography gets build from the bixtex database in ""Bibliography.bib"
 % ------------------------------------------------------------------------------
-\bibliography{Bibliographie} % Aufruf: bibtex Masterarbeit
-\bibliographystyle{natdin} % DIN-Stil des Literaturverzeichnisses
+\bibliography{Bibliography} % build bibliography
+\bibliographystyle{natdin} % DIN-style of the bibliography
 
-\include{Erklaerung} % Selbständigkeitserklärung
+\include{Erklaerung} % SelbstÃ¤ndigkeitserklÃ¤rung
 
-% Anhang -----------------------------------------------------------------------
-%   Die Inhalte des Anhangs werden analog zu den Kapiteln inkludiert.
-%   Dies geschieht in der Datei "Anhang.tex".
+% Appendix -----------------------------------------------------------------------
+%   the contents of the appendix are included same as the other chapters,
+%   by using the file "Appendix.tex".
 % ------------------------------------------------------------------------------
 \begin{appendix}
     \clearpage
     \pagenumbering{roman}
     \chapter{Anhang}
     \label{sec:Anhang}
-    % Rand der Aufzählungen in Tabellen anpassen
+    % adjust the margin of the listings in tables
     \setdefaultleftmargin{1em}{}{}{}{}{}
-    \input{Anhang}
+    \input{Appendix}
 \end{appendix}
 
 % Index ------------------------------------------------------------------------
-%   Zum Erstellen eines Index, die folgende Zeile auskommentieren.
+%   to create an index, uncomment the following line
 % ------------------------------------------------------------------------------
 %\printindex
 
